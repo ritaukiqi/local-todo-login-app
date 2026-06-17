@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import TodoForm from "../components/TodoForm";
+import TodoList from "../components/TodoList";
+import TodoFilters from "../components/TodoFilters";
 
 function TodoPage() {
+  const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
+
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -8,16 +15,33 @@ function TodoPage() {
     navigate("/login");
   };
 
+  const handleAddTask = (title) => {
+    const newTask = {
+      id: Date.now(),
+      title: title,
+      done: false,
+    };
+
+    setTasks([...tasks, newTask]);
+  };
+
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === "active") return !task.done;
+    if (filter === "done") return task.done;
+    return true;
+  });
+
   return (
     <div className="todo-container">
-      <h1>Todo Page</h1>
+      <h1>Todo List</h1>
 
-      <p>Welcome Rita 🎉</p>
+      <TodoForm onAddTask={handleAddTask} />
 
-      <button
-        className="logout-btn"
-        onClick={handleLogout}
-      >
+      <TodoFilters filter={filter} onFilterChange={setFilter} />
+
+      <TodoList tasks={filteredTasks} />
+
+      <button className="logout-btn" onClick={handleLogout}>
         Logout
       </button>
     </div>
