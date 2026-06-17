@@ -39,6 +39,10 @@ function TodoPage() {
 
       <TodoFilters filter={filter} onFilterChange={setFilter} />
 
+      <p className="task-counter">
+        Total Tasks: {tasks.length}
+      </p>
+
       <TodoList tasks={filteredTasks} />
 
       <button className="logout-btn" onClick={handleLogout}>
