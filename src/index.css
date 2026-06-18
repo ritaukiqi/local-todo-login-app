@@ -77,3 +77,25 @@ button:hover {
   margin-top: 20px;
   color: #cbd5e1;
 }
+
+.task-stats {
+  margin: 15px 0;
+  font-weight: bold;
+  color: #60a5fa;
+}
+
+.completed-task span:first-child {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.task-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.task-actions button {
+  padding: 8px;
+  font-size: 13px;
+} 
