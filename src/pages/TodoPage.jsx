@@ -11,7 +11,6 @@ function TodoPage() {
   });
 
   const [filter, setFilter] = useState("all");
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,20 +33,18 @@ function TodoPage() {
   };
 
   const handleToggleDone = (taskId) => {
-    const updatedTasks = tasks.map((task) =>
-      task.id === taskId ? { ...task, done: !task.done } : task
+    setTasks(
+      tasks.map((task) =>
+        task.id === taskId ? { ...task, done: !task.done } : task
+      )
     );
-
-    setTasks(updatedTasks);
   };
 
   const handleDeleteTask = (taskId) => {
     const confirmed = window.confirm("Are you sure you want to delete this task?");
-
     if (!confirmed) return;
 
-    const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(updatedTasks);
+    setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
   const filteredTasks = tasks.filter((task) => {
@@ -59,28 +56,33 @@ function TodoPage() {
   const completedTasks = tasks.filter((task) => task.done).length;
 
   return (
-    <div className="todo-container">
-      <h1>Todo List</h1>
+    <main className="min-h-screen bg-slate-950 flex items-center justify-center px-4 py-10">
+      <section className="w-full max-w-xl bg-slate-900 text-white rounded-2xl shadow-2xl p-6 sm:p-8">
+        <h1 className="text-3xl font-bold text-center mb-6">Todo List</h1>
 
-      <TodoForm onAddTask={handleAddTask} />
+        <TodoForm onAddTask={handleAddTask} />
 
-      <TodoFilters filter={filter} onFilterChange={setFilter} />
+        <TodoFilters filter={filter} onFilterChange={setFilter} />
 
-      <div className="task-stats">
-        <p>Total Tasks: {tasks.length}</p>
-        <p>Completed Tasks: {completedTasks}</p>
-      </div>
+        <div className="flex justify-between gap-4 text-sm text-blue-300 font-semibold my-4">
+          <p>Total Tasks: {tasks.length}</p>
+          <p>Completed: {completedTasks}</p>
+        </div>
 
-      <TodoList
-        tasks={filteredTasks}
-        onToggleDone={handleToggleDone}
-        onDeleteTask={handleDeleteTask}
-      />
+        <TodoList
+          tasks={filteredTasks}
+          onToggleDone={handleToggleDone}
+          onDeleteTask={handleDeleteTask}
+        />
 
-      <button className="logout-btn" onClick={handleLogout}>
-        Logout
-      </button>
-    </div>
+        <button
+          onClick={handleLogout}
+          className="w-full mt-6 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-lg transition"
+        >
+          Logout
+        </button>
+      </section>
+    </main>
   );
 }
 

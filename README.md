@@ -54,3 +54,30 @@ Completed:
 * LocalStorage authentication
 * Logout functionality
 * Basic UI styling
+
+## Day 2 Progress
+
+Completed:
+
+* Add new tasks
+* Task filtering (All / Active / Done)
+* Total task counter
+
+## Day 3 Progress
+
+Completed:
+
+* Done / Undo functionality
+* Delete task functionality
+* LocalStorage persistence
+* Completed tasks counter
+* Delete confirmation
+
+## Day 4 Progress
+
+Completed:
+
+* UI improvements with Tailwind CSS
+* Responsive layout
+* Validation messages
+* Code cleanup and final testing
